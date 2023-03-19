@@ -1,4 +1,6 @@
+require('dotenv').config
+
 module.exports = {
-  dbURL: 'mongodb+srv://theUser:thePass@cluster0-klgzh.mongodb.net/test?retryWrites=true&w=majority',
-  dbName: 'tester_db'
+  dbURL: procces.env.ATLAS_URL,
+  dbName: procces.env.ATLAS_DB_NAME
 }
