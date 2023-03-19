@@ -12,8 +12,11 @@ async function getToys(req, res) {
       page: +req.query.page || 0,
       maxPrice: +req.query.maxPrice || Infinity
     }
-    logger.debug('Getting Toys', filterBy)
-    const toys = await toyService.query(filterBy)
+    const sortBy = req.query.by ? {
+      [req.query.by]: +req.query.desc
+    } : {}
+    logger.debug('Getting Toys', filterBy, sortBy)
+    const toys = await toyService.query(filterBy, sortBy)
     res.json(toys)
   } catch (err) {
     logger.error('Failed to get toys', err)
@@ -94,6 +97,7 @@ async function removeToyMsg(req, res) {
     const { msgId } = req.params
 
     const removedId = await toyService.removeToyMsg(toyId, msgId)
+    console.log('removed msg from toy:', removedId)
     res.send(removedId)
   } catch (err) {
     logger.error('Failed to remove toy msg', err)

@@ -4,7 +4,7 @@ const utilService = require('../../services/util.service')
 const { ObjectId } = require('mongodb')
 const PAGE_SIZE = 6
 
-async function query(filterBy = { name: '' }) {
+async function query(filterBy, sortBy) {
     try {
         const criteria = {}
         if (filterBy.name) {
@@ -22,7 +22,7 @@ async function query(filterBy = { name: '' }) {
         }
 
         const collection = await dbService.getCollection('toy')
-        var toys = await collection.find(criteria).toArray()
+        var toys = await collection.find(criteria).sort(sortBy).toArray()
 
         const startIdx = filterBy.page * PAGE_SIZE
         toys = toys.slice(startIdx, startIdx + PAGE_SIZE)
