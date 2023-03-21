@@ -27,7 +27,7 @@ function setupSocketAPI(http) {
         socket.on('user-typing', userFullname => {
             // TODO: user typing functionality
             if (userFullname) {
-                socket.broadcast.emit('is-typing', userFullname + 'Is typing')
+                socket.broadcast.emit('is-typing', userFullname + ' is typing')
                 return
             }
             socket.broadcast.emit('is-typing', '')
