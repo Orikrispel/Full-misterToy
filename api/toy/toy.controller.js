@@ -75,11 +75,12 @@ async function removeToy(req, res) {
 
 async function addToyMsg(req, res) {
   const { loggedinUser } = req
+  console.log('loggedinUser for adding msg:', loggedinUser)
   try {
     const toyId = req.params.id
     const msg = {
       txt: req.body.txt,
-      createdAt: req.body.createdAt,
+      createdAt: Date.now(),
       from: loggedinUser.fullname
     }
     const savedMsg = await toyService.addToyMsg(toyId, msg)

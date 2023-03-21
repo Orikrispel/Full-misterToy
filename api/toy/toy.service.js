@@ -88,6 +88,7 @@ async function addToyMsg(toyId, msg) {
         msg.id = utilService.makeId()
         const collection = await dbService.getCollection('toy')
         await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
+        console.log('msg:', msg)
         return msg
     } catch (err) {
         logger.error(`cannot add toy msg ${toyId}`, err)
